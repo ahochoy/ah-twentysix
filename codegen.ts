@@ -4,15 +4,13 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
  
 const config: CodegenConfig = {
-  schema: [
-    {
-      'https://graphql.datocms.com': {
-        headers: {
-          Authorization: process.env.DATOCMS_API_TOKEN,
-        },
+  schema: {
+    'https://graphql.datocms.com': {
+      headers: {
+        Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}`,
       },
     },
-  ],
+  },
   documents: ['app/**/*.tsx'],
   generates: {
     './graphql/generated.ts': {
