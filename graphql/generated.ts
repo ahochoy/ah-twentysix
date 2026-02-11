@@ -144,7 +144,7 @@ export type ContactRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  callToAction: Scalars['String']['output'];
+  callToAction?: Maybe<CallToActionRecord>;
   email?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   schedulingLink?: Maybe<Scalars['String']['output']>;
@@ -188,6 +188,7 @@ export type EraModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   description?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
+  spotifyTrackId?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
@@ -210,6 +211,8 @@ export enum EraModelOrderBy {
   UpdatedAtDesc = '_updatedAt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  SpotifyTrackIdAsc = 'spotifyTrackId_ASC',
+  SpotifyTrackIdDesc = 'spotifyTrackId_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC'
 }
@@ -233,6 +236,7 @@ export type EraRecord = RecordInterface & {
   description?: Maybe<Scalars['String']['output']>;
   factoids: Array<FactoidRecord>;
   id: Scalars['ItemId']['output'];
+  spotifyTrackId?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -265,8 +269,8 @@ export type FactoidRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   description?: Maybe<Scalars['String']['output']>;
+  gallery: Array<FileField>;
   id: Scalars['ItemId']['output'];
-  images: Array<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
 };
@@ -3187,8 +3191,8 @@ export type GetAboutContentQuery = { __typename?: 'Query', about?: { __typename?
 export type GetErasContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetErasContentQuery = { __typename?: 'Query', allEras: Array<{ __typename?: 'EraRecord', title?: string | null, description?: string | null }> };
+export type GetErasContentQuery = { __typename?: 'Query', allEras: Array<{ __typename?: 'EraRecord', title?: string | null, description?: string | null, factoids: Array<{ __typename?: 'FactoidRecord', title?: string | null, description?: string | null, gallery: Array<{ __typename?: 'FileField', url: string }> }> }> };
 
 
 export const GetAboutContentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAboutContent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"about"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"introduction"}},{"kind":"Field","name":{"kind":"Name","value":"highlights"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<GetAboutContentQuery, GetAboutContentQueryVariables>;
-export const GetErasContentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getErasContent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allEras"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetErasContentQuery, GetErasContentQueryVariables>;
+export const GetErasContentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getErasContent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allEras"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"markdown"},"value":{"kind":"BooleanValue","value":true}}]},{"kind":"Field","name":{"kind":"Name","value":"factoids"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"markdown"},"value":{"kind":"BooleanValue","value":true}}]},{"kind":"Field","name":{"kind":"Name","value":"gallery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetErasContentQuery, GetErasContentQueryVariables>;
