@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Eras from "./components/Eras";
+import Projects from "./components/Projects";
 
 export default async function Home() {
   return (
@@ -9,6 +10,7 @@ export default async function Home() {
         <Hero />
         <About />
         <Eras />
+        <Projects />
       </main>
     </div >
   );
