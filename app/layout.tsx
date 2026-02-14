@@ -1,10 +1,9 @@
+/// <reference types="css-modules" />
+
 import type { Metadata } from "next";
-import { Tomorrow } from "next/font/google";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import "./globals.css";
-
-const tomorrow = Tomorrow({ subsets: ['latin'], weight: ['400', '500', '600', '700'] })
+import "./globals.css"; 
 
 export const metadata: Metadata = {
   title: "Andrew HoChoy",
@@ -18,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${tomorrow.className} antialiased`}>
+      <body className={`antialiased`}>
         <Header />
         {children}
         <Footer />
